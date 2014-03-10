@@ -22,8 +22,8 @@
 charset
 (font-spec :family "微软雅黑" :size 14)))
 
-;;----Add Marmalade to package-archives for package.el ---
-;;----Add MELPA to package-archives for package.el ---
+;;----添加 Marmalade 到 package-archives  ---
+;;----添加 MELPA 到 package-archives ---
 (require 'package)
 (add-to-list 'package-archives 
     '("marmalade" .
@@ -32,29 +32,6 @@ charset
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
-;;----el-get is a plugin that used to install other plugins---
-;; Commonly used command is M-x el-get-install
-(add-to-list 'load-path "~/.emacs.d/el-get")
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
-
-;(load "~/.emacs.d/lua-mode/lua-mode.el")
-;(autoload 'lua-mode "lua-mode" "Lua editin
-g mode." t)
-;(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-;(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
-
-(load "~/.emacs.d/csharp-mode/csharp-mode.el")
-
-(add-to-list 'load-path "~/.emacs.d/auto-complete")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")
 (ac-config-default)
-(load "~/.emacs.d/auto-complete/auto-complete-etags.el")
-(require 'auto-complete-etags)
+(require 'ac-etags)
