@@ -22,6 +22,15 @@
 charset
 (font-spec :family "Î¢ÈíÑÅºÚ" :size 14)))
 
+;;----Add Marmalade to package-archives for package.el ---
+;;----Add MELPA to package-archives for package.el ---
+(require 'package)
+(add-to-list 'package-archives 
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
 
 ;;----el-get is a plugin that used to install other plugins---
 ;; Commonly used command is M-x el-get-install
@@ -36,7 +45,8 @@ charset
 (el-get 'sync)
 
 ;(load "~/.emacs.d/lua-mode/lua-mode.el")
-;(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+;(autoload 'lua-mode "lua-mode" "Lua editin
+g mode." t)
 ;(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 ;(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
