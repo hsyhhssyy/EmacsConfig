@@ -28,9 +28,9 @@ charset
 ;;----添加 Marmalade 到 package-archives  ---
 ;;----添加 MELPA 到 package-archives ---
 (require 'package)
-(add-to-list 'package-archives 
-    '("marmalade" .
-      "http://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives 
+;;    '("marmalade" .
+;;      "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
@@ -39,3 +39,4 @@ charset
 (require 'auto-complete-config)
 (ac-config-default)
 (require 'ac-etags)
+
