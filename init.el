@@ -40,6 +40,20 @@ charset
 (ac-config-default)
 (require 'ac-etags)
 
+;;---------Smex,一个对M-x的增强插件-----
+(autoload 'smex "smex"
+  "Smex is a M-x enhancement for Emacs, it provides a convenient interface to
+your recently and most frequently used commands.")
+(global-set-key (kbd "M-x") 'smex)
+(defadvice smex (around space-inserts-hyphen activate compile)
+        (let ((ido-cannot-complete-command 
+               `(lambda ()
+                  (interactive)
+                  (if (string= " " (this-command-keys))
+                      (insert ?-)
+                    (funcall ,ido-cannot-complete-command)))))
+          ad-do-it))
+
 ;;---------设置代理-----------
 (defvar reuters-http-proxy "10.40.14.56:80") 
  ;;;###autoload 
