@@ -40,3 +40,28 @@ charset
 (ac-config-default)
 (require 'ac-etags)
 
+;;---------设置代理-----------
+(defvar reuters-http-proxy "10.40.14.56:80") 
+ ;;;###autoload 
+ (defun hsy-toggle-proxy (force) 
+   "Toggle proxy. With prefix, set proxy on." 
+   (interactive "P") 
+   (if (or force 
+           (not (getenv "http_proxy"))) 
+       (progn 
+         (setenv "http_proxy" reuters-http-proxy) 
+         (message "proxy set to %s" (getenv "http_proxy"))) 
+     (setenv "http_proxy" nil) 
+     (message "proxy off"))) 
+
+;;---------Windows Only---仅限Windows------------------
+
+;;-----powershell.el (elpa)，可以启动Windows Powershell--
+(autoload 'powershell "powershell" "Start a interactive shell of PowerShell." t)
+;;--powershell-mode.el (elpa)，为Powershell脚本文件提供mode支持-
+(autoload 'powershell-mode "powershell-mode" "A editing mode for Microsoft PowerShell." t)
+(add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode)) 
+;; PowerShell script
+
+
+;;---------Unix Like Only---仅限Unix类系统------------------
