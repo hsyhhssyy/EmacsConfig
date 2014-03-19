@@ -7,11 +7,10 @@
 ;;Uncomment the following line to byte compile every necessary files (usually after re-install)
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
+
+;;-----------custom-set-variables 在这里！！----------------
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+;;定义语言环境和初始屏幕
  '(current-language-environment "Chinese-GB")
  '(inhibit-startup-screen t))
 
@@ -37,8 +36,10 @@ charset
 
 ;;----------启动auto-complete-----------
 (require 'auto-complete-config)
+(add-to-list 'ac-modes 'csharp-mode)
+(require 'auto-complete-exuberant-ctags)
+(ac-exuberant-ctags-setup)
 (ac-config-default)
-(require 'ac-etags)
 
 ;;---------Smex,一个对M-x的增强插件-----
 (autoload 'smex "smex"
@@ -68,6 +69,12 @@ your recently and most frequently used commands.")
      (setenv "http_proxy" nil) 
      (message "proxy off"))) 
 
+;;---------ctags 的全局快捷键F7---------
+(require 'ctags)
+(defvar ctags-command "ctags -e -R ")
+(setq tags-revert-without-query t)
+(global-set-key (kbd "<f7>") 'ctags-create-or-update-tags-table)
+
 ;;---------Windows Only---仅限Windows------------------
 
 ;;-----powershell.el (elpa)，可以启动Windows Powershell--
@@ -79,3 +86,4 @@ your recently and most frequently used commands.")
 
 
 ;;---------Unix Like Only---仅限Unix类系统------------------
+
