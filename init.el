@@ -15,9 +15,6 @@
 ;;定义语言环境和初始屏幕
  '(current-language-environment "Chinese-GB")
  '(inhibit-startup-screen t)
-;;定义Elim需要的环境变量
- '(eclimd-wait-for-process nil)
-;; '(eclim-executable "C:/Program Files (x86)\eclipse")
 )
 
 ;;中文与外文字体设置
@@ -47,23 +44,6 @@ charset
 ;;绑定auto-complete到其他自定义的mode上
 (add-to-list 'ac-modes 'csharp-mode)
 (add-to-list 'ac-modes 'lua-mode)
-
-;;---------Emacs Eclim---和Eclipse对接的插件----
-;;---------注意需要安装Eclim服务器端，才能使用----
-;;启动eclim模式
-(require 'eclim)
-(global-eclim-mode) 
-(require 'eclimd)
-;;如果eclipse位置有问题，不在path下，需要把它放在开头的custom-set-variables里
-;;(custom-set-variables
-;; '(eclim-eclipse-dirs '("~/opt/eclipse")))
-(setq help-at-pt-display-when-idle t)
-(setq help-at-pt-timer-delay 0.1)
-(help-at-pt-set-timer)
-;;和auto-complete对接
-(require 'ac-emacs-eclim-source)
-(ac-emacs-eclim-config)
-
 
 ;;---------Smex,一个对M-x的增强插件-----
 (autoload 'smex "smex"
