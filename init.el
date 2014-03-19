@@ -7,12 +7,18 @@
 ;;Uncomment the following line to byte compile every necessary files (usually after re-install)
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
+;;-------------启动Debug模式，影响启动速度-----------
+(setq debug-on-error t)
 
 ;;-----------custom-set-variables 在这里！！----------------
 (custom-set-variables
 ;;定义语言环境和初始屏幕
  '(current-language-environment "Chinese-GB")
- '(inhibit-startup-screen t))
+ '(inhibit-startup-screen t)
+;;定义Elim需要的环境变量
+ '(eclimd-wait-for-process nil)
+;; '(eclim-executable "C:/Program Files (x86)\eclipse")
+)
 
 ;;中文与外文字体设置
 ;; Setting English Font
@@ -24,8 +30,9 @@
 charset
 (font-spec :family "微软雅黑" :size 14)))
 
-;;----添加 Marmalade 到 package-archives  ---
-;;----添加 MELPA 到 package-archives ---
+;;----添加 Marmalade 到 package-archives
+;; （由于Marmalade服务器问题暂时注释） ---
+;;----添加 Melpa 到 package-archives ---
 (require 'package)
 ;;(add-to-list 'package-archives 
 ;;    '("marmalade" .
@@ -36,10 +43,27 @@ charset
 
 ;;----------启动auto-complete-----------
 (require 'auto-complete-config)
-(add-to-list 'ac-modes 'csharp-mode)
-(require 'auto-complete-exuberant-ctags)
-(ac-exuberant-ctags-setup)
 (ac-config-default)
+;;绑定auto-complete到其他自定义的mode上
+(add-to-list 'ac-modes 'csharp-mode)
+(add-to-list 'ac-modes 'lua-mode)
+
+;;---------Emacs Eclim---和Eclipse对接的插件----
+;;---------注意需要安装Eclim服务器端，才能使用----
+;;启动eclim模式
+(require 'eclim)
+(global-eclim-mode) 
+(require 'eclimd)
+;;如果eclipse位置有问题，不在path下，需要把它放在开头的custom-set-variables里
+;;(custom-set-variables
+;; '(eclim-eclipse-dirs '("~/opt/eclipse")))
+(setq help-at-pt-display-when-idle t)
+(setq help-at-pt-timer-delay 0.1)
+(help-at-pt-set-timer)
+;;和auto-complete对接
+(require 'ac-emacs-eclim-source)
+(ac-emacs-eclim-config)
+
 
 ;;---------Smex,一个对M-x的增强插件-----
 (autoload 'smex "smex"
@@ -68,12 +92,6 @@ your recently and most frequently used commands.")
          (message "proxy set to %s" (getenv "http_proxy"))) 
      (setenv "http_proxy" nil) 
      (message "proxy off"))) 
-
-;;---------ctags 的全局快捷键F7---------
-(require 'ctags)
-(defvar ctags-command "ctags -e -R ")
-(setq tags-revert-without-query t)
-(global-set-key (kbd "<f7>") 'ctags-create-or-update-tags-table)
 
 ;;---------Windows Only---仅限Windows------------------
 
