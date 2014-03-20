@@ -73,6 +73,10 @@ your recently and most frequently used commands.")
      (setenv "http_proxy" nil) 
      (message "proxy off"))) 
 
+;;--------GTags------------
+(setq load-path (cons "~/.emacs.d/GNUGlobal/share/gtags" load-path))
+(autoload 'gtags-mode "gtags" "" t)
+
 ;;---------Windows Only---仅限Windows------------------
 
 ;;-----powershell.el (elpa)，可以启动Windows Powershell--
