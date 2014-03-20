@@ -27,6 +27,9 @@
 charset
 (font-spec :family "微软雅黑" :size 14)))
 
+;;--------把我的脚本加入load-path----------
+(setq load-path (cons "~/.emacs.d/HSYScripts" load-path))
+
 ;;----添加 Marmalade 到 package-archives
 ;; （由于Marmalade服务器问题暂时注释） ---
 ;;----添加 Melpa 到 package-archives ---
@@ -73,9 +76,15 @@ your recently and most frequently used commands.")
      (setenv "http_proxy" nil) 
      (message "proxy off"))) 
 
-;;--------GTags------------
+;;--------GNU Global Taging System 一个配合auto-complete用的tag系统-------
+;;--------使用时需要把~/.emacs.d/GNUGlobal/bin放到path下-----
 (setq load-path (cons "~/.emacs.d/GNUGlobal/share/gtags" load-path))
-(autoload 'gtags-mode "gtags" "" t)
+(autoload 'gtags-mode "gtags" "A mode for GNU Global Taging" t)
+
+
+;;---自己写了一个用来给auto-complete增加各种功能的插件----
+(autoload 'auto-complete-extend "auto-complete-extend" "Provide extend support for auto complete" t)
+(auto-complete-extend)
 
 ;;---------Windows Only---仅限Windows------------------
 
